@@ -197,14 +197,17 @@ h2.display { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 
 /* ---------- Product detail ---------- */
 
-.hero { padding-block: 48px 64px; }
+.hero { padding-block: 32px 64px; }
 
 .hero-grid {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 48px;
-  align-items: center;
+  align-items: start;
 }
+
+.hero .display { font-size: clamp(2.6rem, 6vw, 4rem); }
+.hero-info .lead { margin-top: 0; }
 
 .hero-media {
   border: 6px solid var(--ember);
@@ -271,6 +274,11 @@ h2.display { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 .collect-note p { margin: 0; color: var(--text); }
 .collect-note p + p { margin-top: 8px; }
 .cta-band .collect-note { margin: 0 auto 28px; text-align: left; }
+
+.buy-row { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-top: 24px; }
+.buy-row .price { margin: 0; line-height: 1; }
+.buy-row .price-note { margin: 6px 0 0; }
+.hero-info .secure-note { margin: 14px 0 22px; }
 
 .secure-note { font-size: 0.85rem; color: var(--muted); margin-top: 14px; }
 
@@ -345,37 +353,52 @@ h2.display { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 
 .price-plus { font-family: var(--body); font-size: 1.1rem; font-weight: 700; color: var(--muted); }
 
+.hero-side { display: flex; flex-direction: column; gap: 24px; }
+
 .founders {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 40px;
-  align-items: center;
-  padding: 40px;
-  border: 6px solid var(--power);
-  border-radius: 20px;
+  padding: 22px 24px 24px;
+  border: 5px solid var(--power);
+  border-radius: 18px;
   background:
-    radial-gradient(ellipse 70% 80% at 0% 0%, rgba(242, 194, 48, 0.18), transparent 70%),
+    radial-gradient(ellipse 70% 80% at 0% 0%, rgba(242, 194, 48, 0.16), transparent 70%),
     var(--ink-2);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
-.founders .eyebrow { color: var(--power); }
-.founders-intro p:last-child { color: var(--muted); margin-bottom: 0; }
+.founders .eyebrow { color: var(--power); margin-bottom: 4px; }
 
-.perks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 14px; }
+.founders h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  color: var(--amber);
+  margin: 0 0 8px;
+}
+
+.founders-intro { color: var(--muted); font-size: 0.95rem; margin: 0 0 14px; }
+
+.perks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 
 .perks li {
-  background: rgba(242, 194, 48, 0.08);
-  border: 2px solid rgba(242, 194, 48, 0.45);
-  border-radius: 14px;
-  padding: 16px 18px;
+  position: relative;
+  padding-left: 30px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.perks strong { font-family: var(--display); font-weight: 400; font-size: 1.15rem; color: var(--power); letter-spacing: 0.01em; }
-.perks span { font-size: 0.95rem; color: var(--text); }
+.perks li::before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--power);
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.perks strong { font-weight: 800; color: var(--power); }
+.perks span { font-size: 0.92rem; color: var(--text); }
 
 .split {
   display: grid;
@@ -492,15 +515,17 @@ h2.display { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 @media (max-width: 860px) {
   .product-grid { grid-template-columns: 1fr; }
   .coming-soon { min-height: 0; padding: 24px; }
-  .hero-grid, .split, .founders { grid-template-columns: 1fr; gap: 32px; }
-  .founders { padding: 28px 20px; }
-  .perks { grid-template-columns: 1fr; }
+  .hero-grid, .split { grid-template-columns: 1fr; gap: 32px; }
+  .hero-side { display: contents; }
+  .hero-info { order: 1; }
+  .founders { order: 2; }
   .card-row, .card-row.steps { grid-template-columns: 1fr; gap: 36px; }
   .steps .game-card:nth-child(n) { transform: none; }
   .gallery { grid-template-columns: 1fr 1fr; }
   .gallery .photo:nth-child(2) { transform: none; }
   .gallery .photo:nth-child(3) { grid-column: span 2; aspect-ratio: 16 / 10; }
   .buy-button { width: 100%; }
+  .buy-row { gap: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
